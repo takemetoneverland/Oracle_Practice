@@ -1,7 +1,7 @@
 
--- ÁýÇÕ ¿¬»êÀÚ
--- UNION(ÇÕÁýÇÕ Áßº¹x), UNION ALL(ÇÕÁýÇÕ Áßº¹o), INTERSECT(±³ÁýÇÕ), MINUS(Â÷ÁýÇÕ)
--- À§ ¾Æ·¡ column °³¼ö°¡ Á¤È®È÷ ÀÏÄ¡ÇØ¾ß ÇÔ.
+-- ì§‘í•© ì—°ì‚°ìž
+-- UNION(í•©ì§‘í•© ì¤‘ë³µx), UNION ALL(í•©ì§‘í•© ì¤‘ë³µo), INTERSECT(êµì§‘í•©), MINUS(ì°¨ì§‘í•©)
+-- ìœ„ ì•„ëž˜ column ê°œìˆ˜ê°€ ì •í™•ížˆ ì¼ì¹˜í•´ì•¼ í•¨.
 
 SELECT
     employee_id, first_name
