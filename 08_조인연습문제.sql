@@ -57,3 +57,51 @@ AND e.last_name = 'King';
 SELECT *
 FROM employees e
 CROSS JOIN departments d;
+
+-- 문제 7
+SELECT
+    e.employee_id AS 사원번호,
+    e.first_name AS 이름,
+    e.salary AS 급여,
+    d.department_name AS 부서명,
+    loc.city AS 근무지
+FROM employees e
+INNER JOIN departments d
+ON e.department_id = d.department_id
+JOIN locations loc
+ON d.location_id = loc.location_id
+WHERE e.job_id = 'SA_MAN';
+
+-- 문제 8
+SELECT *
+FROM employees e
+CROSS JOIN jobs j
+WHERE j.job_title = 'Stock Manager'
+OR j.job_title ='Stock Clerk';
+
+-- 문제 9
+SELECT d.department_name
+FROM departments d
+LEFT OUTER JOIN employees e
+ON d.department_id = e.department_id
+WHERE e.employee_id IS NULL;
+
+-- 문제 10 (SELF JOIN)
+SELECT
+    e1.first_name, e2.first_name AS manager_name
+FROM employees e1
+LEFT JOIN employees e2
+ON e1.manager_id = e2.employee_id;
+
+-- 문제 11
+SELECT
+    e1.employee_id, e1.first_name, e1.manager_id,
+    e2.first_name AS 매니저이름, e2.job_id, e2.salary
+FROM employees e1
+LEFT JOIN employees e2
+ON e1.manager_id = e2.employee_id
+WHERE e1.manager_id IS NOT NULL
+ORDER BY e1.salary DESC;
+
+
+
