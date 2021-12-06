@@ -1,12 +1,12 @@
--- ³»¿ëÈ®ÀÎ,,
--- Å×ÀÌºí »ý¼º°ú Á¦¾à Á¶°Ç
 
--- Å×ÀÌºí ¿­·¹º§ Á¦¾àÁ¶°Ç(PRIMARY KEY, UNIQUE, NOT NULL, FOREIGN KEY)
--- PRIMARY KEY: Å×ÀÌºíÀÇ °íÀ¯ ½Äº° ÄÃ·³ÀÔ´Ï´Ù. (ÁÖ¿ä Å°)
--- UNIQUE: À¯ÀÏÇÑ °ªÀ» °®°Ô ÇÏ´Â ÄÃ·³ (Áßº¹°ª ¹æÁö)
--- NOT NULL: nullÀ» Çã¿ëÇÏÁö ¾ÊÀ½.
--- FOREIGN KEY: ÂüÁ¶ÇÏ´Â Å×ÀÌºíÀÇ PRIMARY KEY¸¦ ÀúÀåÇÏ´Â ÄÃ·³.
--- CHECK: Á¤ÀÇµÈ Çü½Ä¸¸ ÀúÀåµÇµµ·Ï Çã¿ë.
+-- í…Œì´ë¸” ìƒì„±ê³¼ ì œì•½ ì¡°ê±´
+
+-- í…Œì´ë¸” ì—´ë ˆë²¨ ì œì•½ì¡°ê±´ (PRIMARY KEY, UNIQUE, NOT NULL, FOREIGN KEY)
+-- PRIMARY KEY: í…Œì´ë¸”ì˜ ê³ ìœ  ì‹ë³„ ì»¬ëŸ¼ìž…ë‹ˆë‹¤. (ì£¼ìš” í‚¤)
+-- UNIQUE: ìœ ì¼í•œ ê°’ì„ ê°–ê²Œ í•˜ëŠ” ì»¬ëŸ¼ (ì¤‘ë³µê°’ ë°©ì§€)
+-- NOT NULL: nullì„ í—ˆìš©í•˜ì§€ ì•ŠìŒ.
+-- FOREIGN KEY: ì°¸ì¡°í•˜ëŠ” í…Œì´ë¸”ì˜ PRIMARY KEYë¥¼ ì €ìž¥í•˜ëŠ” ì»¬ëŸ¼.
+-- CHECK: ì •ì˜ëœ í˜•ì‹ë§Œ ì €ìž¥ë˜ë„ë¡ í—ˆìš©.
 
 DROP TABLE dept2;
 
@@ -18,7 +18,7 @@ CREATE TABLE dept2 (
     dept_gender VARCHAR2(1) CONSTRAINT dept2_gender_ck CHECK(dept_gender IN('M', 'F'))
 );
 
--- Å×ÀÌºí·¹º§ Á¦¾àÁ¶°Ç (¸ðµç ¿­ ¼±¾ð ÈÄ Á¦¾àÁ¶°ÇÀ» Ãß°¡ÇÏ´Â ¹æ½Ä)
+-- í…Œì´ë¸”ë ˆë²¨ ì œì•½ì¡°ê±´ (ëª¨ë“  ì—´ ì„ ì–¸ í›„ ì œì•½ì¡°ê±´ì„ ì¶”ê°€í•˜ëŠ” ë°©ì‹)
 CREATE TABLE dept2 (
     dept_no NUMBER(2),
     dept_name VARCHAR2(14) NOT NULL,
@@ -36,48 +36,53 @@ CREATE TABLE dept2 (
 
 SELECT * FROM dept2;
 
--- ¿Ü·¡Å°(foreign key)°¡ ºÎ¸ðÅ×ÀÌºí¿¡ ¾ø´Ù¸é INSERT°¡ ºÒ°¡´É.
+-- ì™¸ëž˜í‚¤(foreign key)ê°€ ë¶€ëª¨í…Œì´ë¸”ì— ì—†ë‹¤ë©´ INSERTê°€ ë¶ˆê°€ëŠ¥.
 INSERT INTO dept2
 VALUES (10, 'gg', 4000, sysdate, 100000, 'M');
 
--- ¿Ü·¡Å°°¡ ºÎ¸ðÅ×ÀÌºí¿¡ ÀÖ´Ù¸é INSERT °¡´É.
+-- ì™¸ëž˜í‚¤ê°€ ë¶€ëª¨í…Œì´ë¸”ì— ìžˆë‹¤ë©´ INSERT ê°€ëŠ¥.
 INSERT INTO dept2
 VALUES (30, 'gg', 1800, sysdate, 100000, 'F');
 
 SELECT * FROM dept2;
 
+UPDATE locations
+SET location_id = 4000
+WHERE location_id = 1800; -- ì™¸ëž˜í‚¤ ì œì•½ ì¡°ê±´ ìœ„ë°˜.
+
+
 SELECT * FROM locations;
 
--- Á¦¾à Á¶°Ç º¯°æ
--- Á¦¾à Á¶°ÇÀº Ãß°¡, »èÁ¦°¡ °¡´ÉÇÏ´Ù. º¯°æÀº ¾ÈµÈ´Ù.
--- º¯°æÇÏ·Á¸é »èÁ¦ÇÏ°í »õ·Î¿î ³»¿ëÀ¸·Î Ãß°¡ÇØ¾ß ÇÑ´Ù.
+-- ì œì•½ ì¡°ê±´ ë³€ê²½
+-- ì œì•½ ì¡°ê±´ì€ ì¶”ê°€, ì‚­ì œê°€ ê°€ëŠ¥í•©ë‹ˆë‹¤. ë³€ê²½ì€ ì•ˆë©ë‹ˆë‹¤.
+-- ë³€ê²½í•˜ì‹œë ¤ë©´ ì‚­ì œí•˜ê³  ìƒˆë¡œìš´ ë‚´ìš©ìœ¼ë¡œ ì¶”ê°€í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.
 
 DROP TABLE dept2;
 
 CREATE TABLE dept2 (
-        dept_no NUMBER(2),
-        dept_name VARCHAR2(14),
-        loca NUMBER(4),
-        dept_date DATE,
-        dept_bonus NUMBER(10),
-        dept_gender VARCHAR2(1)
+    dept_no NUMBER(2),
+    dept_name VARCHAR2(14),
+    loca NUMBER(4),
+    dept_date DATE,
+    dept_bonus NUMBER(10),
+    dept_gender VARCHAR2(1)
 );
 
--- pk Ãß°¡
+-- pk ì¶”ê°€
 ALTER TABLE dept2 ADD CONSTRAINT dept_no_pk PRIMARY KEY(dept_no);
--- fk Ãß°¡
-ALTER TABLE dept2 ADD CONSTRAINT dept_loca_fk FOREIGN KEY (loca)
+-- fk ì¶”ê°€
+ALTER TABLE dept2 ADD CONSTRAINT dept_loca_fk FOREIGN KEY (loca) 
 REFERENCES locations(location_id);
--- check Ãß°¡
+-- check ì¶”ê°€
 ALTER TABLE dept2 ADD CONSTRAINT dept2_gender_ck CHECK(dept_gender IN('M', 'F'));
--- UNIQUE Ãß°¡
-ALTER TABLE dept2 ADD CONSTRAINT dept2_gender_uk UNIQUE (dept_name);
--- NOT NULLÀº ¿­ ¼öÁ¤ÇüÅÂ·Î º¯°æÇÑ´Ù.
+-- UNIQUE ì¶”ê°€
+ALTER TABLE dept2 ADD CONSTRAINT dept2_deptname_uk UNIQUE (dept_name);
+-- NOT NULLì€ ì—´ ìˆ˜ì •í˜•íƒœë¡œ ë³€ê²½í•©ë‹ˆë‹¤.
 ALTER TABLE dept2 MODIFY dept_name VARCHAR2(14) NOT NULL;
 
--- Á¦¾àÁ¶°Ç »èÁ¦ (Á¦¾àÁ¶°Ç ÀÌ¸§À¸·Î)
+-- ì œì•½ì¡°ê±´ ì‚­ì œ (ì œì•½ì¡°ê±´ ì´ë¦„ìœ¼ë¡œ)
 ALTER TABLE dept2 DROP CONSTRAINT dept_no_pk;
 
--- Á¦¾à Á¶°Ç È®ÀÎ
+-- ì œì•½ ì¡°ê±´ í™•ì¸
 SELECT * FROM user_constraints
 WHERE table_name = 'DEPT2';
